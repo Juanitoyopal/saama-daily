@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AffiliateWhatsappCTA } from "@/components/AffiliateWhatsappCTA";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 const clientPriceItems = [
   "Compra directa en el canal oficial.",
@@ -35,6 +36,13 @@ export default function QuieroAfiliarmePage() {
     <>
       <section className="border-b border-ink/10 bg-white/50">
         <div className="section-shell">
+          <Breadcrumbs
+            items={[
+              { label: "Inicio", href: "/" },
+              { label: "Emprende", href: "/emprende" },
+              { label: "Afiliación" }
+            ]}
+          />
           <p className="eyebrow">Precio afiliado</p>
           <h1 className="mt-4 max-w-4xl text-4xl font-semibold leading-tight text-ink text-balance sm:text-5xl">
             Accede al precio afiliado y conoce la oportunidad de distribuir Gano Excel
@@ -151,6 +159,27 @@ export default function QuieroAfiliarmePage() {
             compensación y políticas vigentes de Gano Excel. No se garantizan
             resultados económicos.
           </p>
+        </div>
+      </section>
+
+      <section className="border-t border-ink/10 bg-white/55">
+        <div className="section-shell">
+          <p className="eyebrow">Continuar explorando</p>
+          <h2 className="section-heading">Afiliación forma parte de Emprende</h2>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Link className="button-primary" href="/emprende">
+              Volver a Emprende
+            </Link>
+            <Link className="button-secondary" href="/productos?country=co">
+              Ver catálogo Colombia
+            </Link>
+            <Link className="button-secondary" href="/afiliacion/12-formas-de-generar-ingresos">
+              Conocer las 12 formas de generar ingresos
+            </Link>
+            <Link className="button-secondary" href="/asesoria-personalizada">
+              Solicitar asesoría personalizada
+            </Link>
+          </div>
         </div>
       </section>
     </>
