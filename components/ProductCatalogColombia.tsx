@@ -7,10 +7,11 @@ import { ProductCard } from "./ProductCard";
 
 type ProductCatalogColombiaProps = {
   products: ProductColombia[];
+  initialCategory?: (typeof productCategoriesColombia)[number];
 };
 
-export function ProductCatalogColombia({ products }: ProductCatalogColombiaProps) {
-  const [selectedCategory, setSelectedCategory] = useState<(typeof productCategoriesColombia)[number]>("Todos");
+export function ProductCatalogColombia({ products, initialCategory = "Todos" }: ProductCatalogColombiaProps) {
+  const [selectedCategory, setSelectedCategory] = useState<(typeof productCategoriesColombia)[number]>(initialCategory);
 
   const filteredProducts = useMemo(() => {
     if (selectedCategory === "Todos") {

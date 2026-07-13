@@ -7,6 +7,12 @@ import { brand } from "@/data/brand";
 import { countries } from "@/data/countries";
 import { navItems } from "@/data/navigation";
 
+const mainNavItems = navItems.filter((item) => item.href !== "/soporte");
+const countryLabels = {
+  CO: { flag: "🇨🇴", label: "Colombia" },
+  US: { flag: "🇺🇸", label: "United States" }
+} as const;
+
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -40,7 +46,7 @@ export function Header() {
         </Link>
 
         <nav aria-label="Navegación principal" className="hidden items-center gap-4 text-sm font-medium text-ink/70 xl:flex">
-          {navItems.map((item) => (
+          {mainNavItems.map((item) => (
             <Link
               aria-current={pathname === item.href ? "page" : undefined}
               className="rounded-sm transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-olive"
@@ -53,18 +59,35 @@ export function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
+          <span className="hidden text-base xl:inline-flex" aria-hidden="true">
+            🌐
+          </span>
           {countries.map((country) => (
             <Link
-              className="hidden rounded-full px-3 py-2 text-sm font-semibold text-ink/70 transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-olive xl:inline-flex"
+              className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-ink/70 transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-olive xl:inline-flex"
               href={country.path}
               key={country.code}
             >
-              {country.code}
+              <span aria-hidden="true">{countryLabels[country.code].flag}</span>
+              <span>{countryLabels[country.code].label}</span>
             </Link>
           ))}
           <Link className="button-primary hidden px-4 py-2 sm:inline-flex" href="/soporte" onClick={closeMenu}>
             Soporte
           </Link>
+          <a
+            aria-label="Ingresa a tu Back Office"
+            className="hidden h-11 w-11 items-center justify-center rounded-full border border-ink/15 bg-white/75 text-ink transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-olive sm:inline-flex"
+            href="https://colombia.ganoexcel.com/Login.aspx?ReturnUrl=%2f"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="Ingresa a tu Back Office"
+          >
+            <svg aria-hidden="true" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" viewBox="0 0 24 24">
+              <path d="M20 21a8 8 0 0 0-16 0" />
+              <path d="M12 13a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" />
+            </svg>
+          </a>
           <button
             aria-controls="mobile-navigation"
             aria-expanded={isMenuOpen}
@@ -109,10 +132,23 @@ export function Header() {
                 key={country.code}
                 onClick={closeMenu}
               >
-                <span>{country.name}</span>
+                <span>{countryLabels[country.code].flag} {countryLabels[country.code].label}</span>
                 <span className="text-xs tracking-[0.14em] text-coffee">{country.code}</span>
               </Link>
             ))}
+            <a
+              className="mt-2 flex items-center justify-between rounded-lg border border-ink/10 bg-white/70 px-4 py-3 text-sm font-semibold text-ink/75 transition hover:bg-white hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-olive"
+              href="https://colombia.ganoexcel.com/Login.aspx?ReturnUrl=%2f"
+              onClick={closeMenu}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <span>Ingresa a tu Back Office</span>
+              <svg aria-hidden="true" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" viewBox="0 0 24 24">
+                <path d="M20 21a8 8 0 0 0-16 0" />
+                <path d="M12 13a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" />
+              </svg>
+            </a>
           </div>
         </nav>
       ) : null}

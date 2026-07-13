@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { ProductCatalogColombia } from "@/components/ProductCatalogColombia";
 import { colombia, unitedStates } from "@/data/countries";
-import { productsColombia } from "@/data/products-colombia";
+import { productCategoriesColombia, productsColombia } from "@/data/products-colombia";
 
 type ProductosPageProps = {
   searchParams?: Promise<{
+    category?: string;
     country?: string;
   }>;
 };
@@ -12,6 +13,8 @@ type ProductosPageProps = {
 export default async function ProductosPage({ searchParams }: ProductosPageProps) {
   const params = await searchParams;
   const country = params?.country?.toLowerCase();
+  const requestedCategory = params?.category;
+  const initialCategory = productCategoriesColombia.find((category) => category === requestedCategory) ?? "Todos";
 
   if (country === "co") {
     return (
@@ -32,7 +35,7 @@ export default async function ProductosPage({ searchParams }: ProductosPageProps
             </p>
           </div>
         </section>
-        <ProductCatalogColombia products={productsColombia} />
+        <ProductCatalogColombia initialCategory={initialCategory} products={productsColombia} />
       </>
     );
   }

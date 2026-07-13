@@ -50,7 +50,7 @@ export function ProductCard({ product }: ProductCardProps) {
             </p>
           </div>
           <p className="mt-3 text-xs font-semibold text-coffee">
-            Ahorra {formatMoney(product.savings)} al afiliarte
+            Descuento {product.discount} · Ahorra {formatMoney(product.savings)} al afiliarte
           </p>
         </div>
 

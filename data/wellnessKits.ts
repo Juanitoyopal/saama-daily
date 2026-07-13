@@ -2,37 +2,52 @@ export type WellnessKit = {
   title: string;
   subtitle: string;
   items: string[];
+  originalValue: string;
+  kitValue: string;
+  savings: string;
+  image: string;
+  imageAlt: string;
 };
 
 export const wellnessKits: WellnessKit[] = [
   {
-    title: "Kit energía diaria",
+    title: "Kit Café Funcional Diario",
     subtitle:
-      "Para acompañar mañanas activas, jornadas de trabajo y rutinas con más intención.",
-    items: ["Cafés funcionales", "Guía de uso", "Soporte por país"]
+      "Una selección para quienes aman el café y desean disfrutar diferentes preparaciones funcionales con Ganoderma lucidum durante el día.",
+    items: ["Ganocafé Classic", "Ganocafé 3 en 1", "Ganorico Latte Rico", "Ganorico Mocha Rico"],
+    originalValue: "$609.600",
+    kitValue: "$461.600",
+    savings: "$148.000",
+    image: "/images/saama-daily/kits/kit-cafe-funcional-diario.jpg",
+    imageAlt: "Producto del Kit Café Funcional Diario"
   },
   {
-    title: "Kit rutina antioxidante",
+    title: "Kit Desayuno y Pausa Sin Café",
     subtitle:
-      "Una selección pensada para quienes quieren integrar productos funcionales a una rutina consciente.",
-    items: ["Bebidas funcionales", "Orientación de consumo", "Recompra organizada"]
+      "Una opción sin café para acompañar el desayuno, una pausa tranquila y un momento cálido de disfrute durante el día con Ganoderma lucidum.",
+    items: ["Gano C'Real Spirulina", "Oleaf Gano Rooibos Drink", "Ganorico Shoko Rico"],
+    originalValue: "$480.300",
+    kitValue: "$364.700",
+    savings: "$115.600",
+    image: "/images/saama-daily/kits/kit-desayuno-pausa-sin-cafe.jpg",
+    imageAlt: "Producto del Kit Desayuno y Pausa Sin Café"
   },
   {
-    title: "Kit bienestar digestivo",
+    title: "Kit Cuidado Personal Saama Daily",
     subtitle:
-      "Productos y bebidas funcionales para acompañar hábitos diarios de equilibrio y bienestar.",
-    items: ["Bebidas suaves", "Acompañamiento personalizado", "Guía de rutina"]
-  },
-  {
-    title: "Kit inicio inteligente",
-    subtitle:
-      "Para personas que quieren empezar con productos Gano Excel de forma clara y organizada.",
-    items: ["Selección inicial", "Explicación sencilla", "Soporte antes de comprar"]
-  },
-  {
-    title: "Kit café funcional",
-    subtitle:
-      "Para quienes disfrutan el café y quieren incorporarlo dentro de una rutina funcional.",
-    items: ["Cafés seleccionados", "Recomendación de uso", "Compra segura"]
+      "Una rutina completa de cuidado personal para acompañar la higiene diaria, el cuidado bucal, la piel y el cabello con Ganoderma lucidum.",
+    items: [
+      "Gano Fresh Toothpaste",
+      "Gano Soap",
+      "Gano Transparent Soap",
+      "Piel8Brillo Shampoo",
+      "Piel8Brillo Acondicionador",
+      "Piel8Brillo Exfoliante Corporal"
+    ],
+    originalValue: "$581.500",
+    kitValue: "$448.000",
+    savings: "$133.500",
+    image: "/images/saama-daily/kits/kit-cuidado-personal-saama-daily.jpg",
+    imageAlt: "Productos del Kit Cuidado Personal Saama Daily"
   }
 ];

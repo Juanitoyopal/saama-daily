@@ -46,24 +46,44 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const optionalDetails = [
     product.ingredients ? ["Ingredientes", product.ingredients] : null,
     product.presentation ? ["Presentación", product.presentation] : null,
-    product.usage ? ["Modo de uso", product.usage] : null,
+    product.usage ? ["Recomendación de uso", product.usage] : null,
     product.sanitaryRegistration ? ["Registro sanitario", product.sanitaryRegistration] : null,
     product.sanitaryNotification ? ["Notificación sanitaria", product.sanitaryNotification] : null
   ].filter(Boolean) as [string, string][];
+  const regulationNotes = Array.from(
+    new Set([product.dietarySupplementNotice, ...product.legalNotes].filter(Boolean))
+  ) as string[];
 
   return (
     <>
       <section className="border-b border-ink/10 bg-white/50">
         <div className="section-shell grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <div className="relative aspect-square overflow-hidden rounded-lg border border-ink/10 bg-linen shadow-soft">
-            <Image
-              alt={product.name}
-              className="object-contain p-8"
-              fill
-              priority
-              sizes="(min-width: 1024px) 42vw, 100vw"
-              src={product.image}
-            />
+          <div className="grid gap-4">
+            <div className="relative aspect-square overflow-hidden rounded-lg border border-ink/10 bg-linen shadow-soft">
+              <Image
+                alt={product.name}
+                className="object-contain p-8"
+                fill
+                priority
+                sizes="(min-width: 1024px) 42vw, 100vw"
+                src={product.image}
+              />
+            </div>
+            {product.images.length > 1 ? (
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {product.images.map((image, index) => (
+                  <div className="relative aspect-square overflow-hidden rounded-lg border border-ink/10 bg-white shadow-soft" key={image}>
+                    <Image
+                      alt={`${product.name} fotografía ${index + 1}`}
+                      className="object-contain p-4"
+                      fill
+                      sizes="(min-width: 1024px) 14vw, (min-width: 640px) 30vw, 50vw"
+                      src={image}
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : null}
           </div>
 
           <div>
@@ -71,7 +91,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <h1 className="mt-4 text-4xl font-semibold leading-tight text-ink text-balance sm:text-5xl">
               {product.name}
             </h1>
-            <p className="mt-5 text-lg leading-8 text-ink/70">{product.fullDescription}</p>
+            <p className="mt-5 whitespace-pre-line text-lg leading-8 text-ink/70">{product.fullDescription}</p>
 
             <div className="mt-7 grid gap-3 rounded-lg border border-ink/10 bg-linen/80 p-5">
               <p className="flex justify-between gap-4 text-sm text-ink/70">
@@ -83,7 +103,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 <strong className="text-olive-dark">{formatMoney(product.affiliatePrice)}</strong>
               </p>
               <p className="text-sm font-semibold text-coffee">
-                Ahorra {formatMoney(product.savings)} al afiliarte
+                Descuento {product.discount} · Ahorra {formatMoney(product.savings)} al afiliarte
               </p>
               <p className="text-xs leading-5 text-ink/60">{product.priceAccessNote}</p>
             </div>
@@ -134,10 +154,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
             {optionalDetails.map(([label, value]) => (
               <div key={label}>
                 <p className="font-semibold text-ink">{label}</p>
-                <p className="mt-1">{value}</p>
+                <p className="mt-1 whitespace-pre-line">{value}</p>
               </div>
             ))}
-            {product.dietarySupplementNotice ? <p>{product.dietarySupplementNotice}</p> : null}
+            {regulationNotes.map((note) => (
+              <p key={note}>{note}</p>
+            ))}
             <p>
               La información presentada tiene fines educativos y comerciales. No
               sustituye valoración, diagnóstico ni tratamiento médico.
